@@ -4,7 +4,7 @@ import random
 # Create your models here.
 class  Code(models.Model):
     number = models.CharField(max_length=6, blank=True)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE) 
 
     def __str__(self):
         return str(self.number)
