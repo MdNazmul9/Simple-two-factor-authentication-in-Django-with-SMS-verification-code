@@ -1,4 +1,4 @@
-from django.db.models import forms
+from django import forms
 from .models import Code
 
 class CodeForm(forms.ModelForm):

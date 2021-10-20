@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from codes.forms import CodeForm
+
 from users.models import CustomUser
 
 @login_required
@@ -17,7 +18,7 @@ def auth_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             request.session['pk'] = user.pk
-            return redirect()
+            return redirect('users:verify-view')
     return render(request, 'auth.html', {'form': form})
 
 
@@ -36,7 +37,8 @@ def verify_view(request):
             if str(code) == num:
                 code.save()
                 login(request, user)
-                return redirect()
+                return redirect('users:home-view')
             else:  
-                return redirect() 
+                return redirect('login-view') 
     return render(request, 'verify.html', {'form':form})
+
