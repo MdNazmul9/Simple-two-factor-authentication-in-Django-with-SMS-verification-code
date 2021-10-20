@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from codes.forms import CodeForm
 
 from users.models import CustomUser
@@ -15,9 +15,14 @@ def auth_view(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
+
+        print('username:',username)
+        print('password:',password)
+
         user = authenticate(request, username=username, password=password)
         if user is not None:
             request.session['pk'] = user.pk
+            print('user.pk',user.pk)
             return redirect('users:verify-view')
     return render(request, 'auth.html', {'form': form})
 
@@ -27,11 +32,13 @@ def verify_view(request):
     pk = request.session.get('pk')
     if pk:
         user = CustomUser.objects.get(pk=pk)
+        
         code = user.code
         code_user = f"{user.username}:{user.code}"
         if not request.POST:
+            print(code_user)
             #send sms
-            pass
+            # pass
         if form.is_valid():
             num = form.cleaned_data.get('number')
             if str(code) == num:
@@ -39,6 +46,6 @@ def verify_view(request):
                 login(request, user)
                 return redirect('users:home-view')
             else:  
-                return redirect('login-view') 
+                return redirect('users:login-view') 
     return render(request, 'verify.html', {'form':form})
 
