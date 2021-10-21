@@ -39,15 +39,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     created_by = models.CharField(max_length=150, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     contact_no = models.CharField(max_length=20)
+    # phone_number = models.CharField(max_length=20)
 
     user_type = models.IntegerField(null=True)
 
     is_active = models.BooleanField(default=True)
-    is_employee= models.BooleanField(default=False)
+
     is_staff = models.BooleanField(default=False)
     is_moderator = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
-    status= models.IntegerField(null=True)
+    is_employee= models.BooleanField(default=False)
+    status= models.IntegerField(default=1)
     is_editable = models.BooleanField(default=True)
 
     objects = CustomAccountManager()
