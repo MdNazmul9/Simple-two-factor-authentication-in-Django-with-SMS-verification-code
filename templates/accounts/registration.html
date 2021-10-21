@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %}
+    register user
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <!-- {% if error %}
+                <p>These email is already in used, please enter another one.</p>
+            {% endif %} -->
+                <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
+
+                <form action="{% url 'register' %}" method="post" class="uniForm">
+                    {% csrf_token %}
+
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
