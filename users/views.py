@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from codes.forms import CodeForm
+from .utils import sms_send
 
 from users.models import CustomUser
 
@@ -37,6 +38,8 @@ def verify_view(request):
         code_user = f"{user.username}:{user.code}"
         if not request.POST:
             print(code_user)
+            to_phone='+8801521477032'
+            sms_send(to_phone,code)
             #send sms
             # pass
         if form.is_valid():
