@@ -12,7 +12,7 @@ from .views import (user_logout, home, AuthViewSet,
                     ModeratorDetailsApi, OwnerDetailsApi, CustomerDetailsApi, EmployeeDetailsApi, MyTokenObtainPairView,
                     )
 
-app_name = 'accounts'
+# app_name = 'accounts'
 from rest_framework import routers
 
 router = routers.DefaultRouter(trailing_slash=True)
