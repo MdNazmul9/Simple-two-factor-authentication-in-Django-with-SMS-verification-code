@@ -45,9 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Local app
-    # 'users',
     'accounts',
-    # 'codes',
+    'codes',
     
     # 3rd party
     'crispy_forms',
@@ -60,7 +59,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_URL = '/login/'
 AUTH_USER_MODEL = 'accounts.User'
 
-# AUTH_USER_MODEL = 'users.CustomUser'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
